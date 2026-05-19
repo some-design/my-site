@@ -5,14 +5,14 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>some | Better for some</title>
+    <title>some</title>
 
-    <meta name="description" content="some Inc. | Better for some">
-    <meta name="keywords" content="some,インテリアデザイン,空間デザイン,建築">
+    <meta name="description" content="some Inc. Portfolio">
+    <meta name="keywords" content="some,空間デザイン,インテリアデザイン">
 
     <style>
         /* ==========================================================================
-           1. ベースリセット＆共通スタイル（ミニマルで構造的な空間美を表現）
+           1. 元サイトのリセット＆基本スタイル完全シミュレート
            ========================================================================== */
         * {
             margin: 0;
@@ -42,12 +42,6 @@
             list-style: none;
         }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            vertical-align: bottom;
-        }
-
         #wrapper {
             display: flex;
             width: 100%;
@@ -61,7 +55,7 @@
         }
 
         /* ==========================================================================
-           2. c-header（左側固定ヘッダー：some仕様）
+           2. c-header (左側固定ナビゲーション)
            ========================================================================== */
         .c-header {
             width: 320px;
@@ -76,23 +70,14 @@
             z-index: 1000;
         }
 
-        /* ロゴ：幾何学的かつ芯のある美しさを表現する小文字ボールド */
+        /* 「some」テキストロゴ（芯のあるモダンな仕上がり） */
         .c-header__logo {
             font-size: 42px;
             font-weight: 700;
             letter-spacing: -0.03em;
             line-height: 1;
             text-transform: lowercase;
-        }
-
-        /* フィロソフィー：ロゴに美しく寄り添うタイポグラフィ */
-        .c-header__tagline {
-            font-size: 11px;
-            font-weight: 400;
-            color: #999999;
-            margin-top: 8px;
-            margin-bottom: 50px;
-            letter-spacing: 0.06em;
+            margin-bottom: 40px;
         }
 
         .c-header__nav__item {
@@ -107,7 +92,7 @@
         }
 
         /* ==========================================================================
-           3. p-top / c-list1（右側コンテンツ：作品画像エリア）
+           3. p-top / c-list1 (右側メイン・画像枠フレームエリア)
            ========================================================================== */
         .p-top {
             margin-left: 320px;
@@ -129,7 +114,7 @@
             position: relative;
         }
 
-        /* 本番画像が入るまでのアウトラインプレースホルダー（比率 3:2 維持） */
+        /* 画像を入れず、枠線（フレーム）と比率だけを完全に維持するアプローチ */
         .c-list1__inner a {
             display: block;
             width: 100%;
@@ -137,7 +122,6 @@
             border: 1px solid #e5e5e5;
             background-color: #fafafa;
             position: relative;
-            transition: border-color 0.3s ease;
         }
 
         .c-list1__inner a:hover {
@@ -145,20 +129,9 @@
             border-color: #1a1311;
         }
 
-        .c-list1__inner a::before {
-            content: "IMAGE PLACEHOLDER";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 11px;
-            color: #b0b0b0;
-            letter-spacing: 0.1em;
-        }
-
-        /* 空間の素材や計画内容を引き立てるキャプション */
+        /* 元の画像オルタナティブテキスト（作品名）をフレーム下にさりげなく可視化 */
         .c-list1__inner::after {
-            content: attr(data-title);
+            content: attr(data-label);
             display: block;
             margin-top: 8px;
             font-size: 12px;
@@ -167,7 +140,7 @@
         }
 
         /* ==========================================================================
-           4. c-list3（下部：年別プロジェクトテキストアーカイブ）
+           4. c-list3 (下部・年別テキストアーカイブ完全再現)
            ========================================================================== */
         .c-list3 {
             width: 100%;
@@ -204,13 +177,14 @@
         .c-list3__child a {
             border-bottom: 1px solid transparent;
         }
+        
         .c-list3__child a:hover {
             opacity: 1;
             border-bottom: 1px solid #1a1311;
         }
 
         /* ==========================================================================
-           5. c-footer & その他パーツ
+           5. c-footer
            ========================================================================== */
         .c-footer {
             margin-left: 320px;
@@ -234,12 +208,13 @@
             opacity: 0.4;
             transition: opacity 0.3s ease;
         }
+        
         .js-gotop a:hover {
             opacity: 1;
         }
 
         /* ==========================================================================
-           6. レスポンシブ（スマートフォン表示対応）
+           6. レスポンシブ対応（スマホ表示対応）
            ========================================================================== */
         @media (max-width: 900px) {
             #wrapper {
@@ -253,7 +228,7 @@
                 padding: 40px 24px 20px 24px;
             }
 
-            .c-header__tagline {
+            .c-header__logo {
                 margin-bottom: 25px;
             }
 
@@ -291,7 +266,6 @@
                 margin-left: 0;
                 width: 100%;
                 padding: 0 24px 40px 24px;
-                flex-direction: row;
             }
         }
     </style>
@@ -300,72 +274,153 @@
 
     <div id="wrapper">
         
-        <!-- 左側：固定ヘッダー -->
+        <!-- 左ヘッダーエリア -->
         <header class="c-header">
             <h1 class="c-header__logo">
                 <a href="#">some</a>
             </h1>
-            <div class="c-header__tagline">Better for some</div>
-            
             <nav class="c-header__nav">
                 <ul class="c-header__nav__inner">
                     <li class="c-header__nav__item"><a href="#">works</a></li>
                     <li class="c-header__nav__item"><a href="#">profile</a></li>
                     <li class="c-header__nav__item"><a href="#">contact</a></li>
-                    <li class="c-header__nav__item"><a href="https://www.instagram.com/" target="_blank">instagram</a></li>
+                    <li class="c-header__nav__item"><a href="#">recruit</a></li>
+                    <li class="c-header__nav__item"><a href="https://www.instagram.com/some_inc/" target="_blank">instagram</a></li>
                 </ul>
             </nav>
         </header>
 
-        <!-- 右側：メインコンテンツ -->
+        <!-- 右メインコンテンツエリア -->
         <main class="p-top">
             
-            <!-- メインビジュアル / 作品リスト（※画像パスが入るとアウトライン内に写真が描写されます） -->
+            <!-- 作品画像フレームリスト（画像なし・枠線のみ） -->
             <ul class="c-list1">
-                <li class="c-list1__inner" data-title="PROJECT 01 / MORTEX FINISH">
-                    <a href="#">
-                        <!-- <img src="images/work01.jpg" alt="PROJECT 01" loading="lazy" width="717" height="478"> -->
-                    </a>
-                </li>
-                <li class="c-list1__inner" data-title="PROJECT 02 / D-BOARD WALL PANEL">
-                    <a href="#">
-                        <!-- <img src="images/work02.jpg" alt="PROJECT 02" loading="lazy" width="717" height="478"> -->
-                    </a>
-                </li>
-                <li class="c-list1__inner" data-title="PROJECT 03 / PEARL STUCCO WALL">
-                    <a href="#">
-                        <!-- <img src="images/work03.jpg" alt="PROJECT 03" loading="lazy" width="717" height="478"> -->
-                    </a>
-                </li>
-                <li class="c-list1__inner" data-title="PROJECT 04 / SPACE DESIGN PLAN">
-                    <a href="#">
-                        <!-- <img src="images/work04.jpg" alt="PROJECT 04" loading="lazy" width="717" height="478"> -->
-                    </a>
-                </li>
+                <li class="c-list1__inner" data-label="OLINA"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="Sta.麻布台"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="OSAJIルミネ横浜店"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="OSAJIルミネ池袋店"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="OSAJIルミネ大宮店"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="HAPPY NUTS DAY"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="高橋邸"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="Sta.日本橋"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="NUMBER SUGAR Daikanyama"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="ATELIER MUJI GINZA Found MUJI展 いいものに巡り会う旅"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="NUMBER SUGAR Omotesando"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="KOTARO NUKAGA ROPPONGI"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="Sta.神田"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="くらしの美術館 –遠隔の共創–"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="さいたま国際芸術祭2020"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="NUMBER SUGAR Marunouchi"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="ATELIER MUJI GINZA「考える。益子の新しい伝統に向けて」展"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="BAO BAO ISSEY MIYAKE AUTUMN WINTER 2019"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="Sta. 渋谷"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="Mitsui"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="BAO BAO ISSEY MIYAKE SPRING SUMMER 2019"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="miwa"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="CaDesign"><a href="#"></a></li>
+                <li class="c-list1__inner" data-label="HIRUME"><a href="#"></a></li>
             </ul>
 
-            <!-- 下部：テキストアーカイブリスト（someの実績プレースホルダー） -->
+            <!-- 下部：年別プロジェクトテキストアーカイブ（元データをそっくりそのまま配置） -->
             <div class="l-container">
                 <ul class="c-list3">
                     
-                    <!-- 2026年 -->
-                    <li class="c-list3__inner">
-                        <p class="c-list3__year">2026</p>
-                        <ul class="c-list3__child">
-                            <li><a href="#">Some Inc. Project</a></li>
-                            <li>Structural Aesthetics Studio</li>
-                            <li>Material Study Exhibition 2026</li>
-                        </ul>
-                    </li>
-
-                    <!-- 2025年 -->
                     <li class="c-list3__inner">
                         <p class="c-list3__year">2025</p>
                         <ul class="c-list3__child">
-                            <li><a href="#">Partnership Salon Project</a></li>
-                            <li>Commercial Interior Concept</li>
-                            <li>Private Residence S</li>
-                            <li>Minimalist Housing Case</li>
+                            <li>TENTIAL丸の内</li>
+                            <li>TENTIAL横浜みなとみらい</li>
+                            <li>OSAJI 有楽町マルイ</li>
+                            <li>OSAJIさんすて岡山</li>
+                            <li>OSAJI福岡空港</li>
+                            <li>OSAJI広島ミナモア</li>
+                            <li>OSAJI仙台エスパル</li>
+                            <li>HOMME PLISSÉ ISSEY MIYAKE 25SS / 4月</li>
+                            <li>日</li>
+                            <li>YWE</li>
+                            <li>JAPAN HOUSE</li>
+                        </ul>
+                    </li>
+
+                    <li class="c-list3__inner">
+                        <p class="c-list3__year">2024</p>
+                        <ul class="c-list3__child">
+                            <li>OSAJIタカシマヤゲートタワーモール店</li>
+                            <li><a href="#">OLINA</a></li>
+                            <li>PRIME SAKE</li>
+                            <li>anonymous studio</li>
+                            <li>OSAJIルクア大阪</li>
+                            <li>OSAJIルミネ立川</li>
+                            <li>プラザ骨董通り</li>
+                            <li>Now Printing</li>
+                        </ul>
+                    </li>
+
+                    <li class="c-list3__inner">
+                        <p class="c-list3__year">2023</p>
+                        <ul class="c-list3__child">
+                            <li>BAO BAO ISSEY MIYAKE 2023SS</li>
+                            <li><a href="#">OSAJIルミネ大宮店</a></li>
+                            <li><a href="#">OSAJIルミネ池袋店</a></li>
+                            <li>BAO BAO ISSEY MIYAKE 2023AW</li>
+                            <li>Me POPCORN</li>
+                            <li><a href="#">OSAJIルミネ横浜店</a></li>
+                            <li>ATELIER MUJI GINZA Life in Art JAPAN CRAFT 『百工のデザイン』展</li>
+                            <li><a href="#">Sta.麻布台</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="c-list3__inner">
+                        <p class="c-list3__year">2022</p>
+                        <ul class="c-list3__child">
+                            <li><a href="#">NUMBER SUGAR Daikanyama</a></li>
+                            <li>ISSEY MIYAKE EYES</li>
+                            <li><a href="#">Sta.日本橋</a></li>
+                            <li><a href="#">高橋邸</a></li>
+                            <li><a href="#">HAPPY NUTS DAY</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="c-list3__inner">
+                        <p class="c-list3__year">2021</p>
+                        <ul class="c-list3__child">
+                            <li><a href="#">くらしの美術館</a></li>
+                            <li><a href="#">Sta.神田</a></li>
+                            <li><a href="#">KOTARO NUKAGA ROPPONGI</a></li>
+                            <li>GINZA MAISON HERMÈS Le Studio</li>
+                            <li><a href="#">NUMBER SUGAR Omotesando</a></li>
+                            <li><a href="#">ATELIER MUJI GINZA Found MUJI 展</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="c-list3__inner">
+                        <p class="c-list3__year">2020</p>
+                        <ul class="c-list3__child">
+                            <li><a href="#">NUMBER SUGAR Marunouchi</a></li>
+                            <li>Kurt</li>
+                            <li><a href="#">さいたま国際芸術祭2020</a></li>
+                            <li>立茶道</li>
+                            <li>TOKYO PLACENTA</li>
+                        </ul>
+                    </li>
+
+                    <li class="c-list3__inner">
+                        <p class="c-list3__year">2019</p>
+                        <ul class="c-list3__child">
+                            <li><a href="#">miwa</a></li>
+                            <li><a href="#">BAO BAO ISSEY MIYAKE 2019SS</a></li>
+                            <li><a href="#">Mitsui</a></li>
+                            <li><a href="#">Sta. 渋谷</a></li>
+                            <li><a href="#">BAO BAO ISSEY MIYAKE 2019AW</a></li>
+                            <li><a href="#">ATELIER MUJI GINZA「考える。益子の新しい伝統に向けて」展</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="c-list3__inner">
+                        <p class="c-list3__year">2018</p>
+                        <ul class="c-list3__child">
+                            <li><a href="#">HIRUME</a></li>
+                            <li><a href="#">CaDesign</a></li>
                         </ul>
                     </li>
 
@@ -375,15 +430,15 @@
         </main>
     </div>
 
-    <!-- フッター -->
+    <!-- フッターエリア -->
     <footer class="c-footer">
         <div class="l-container">
             <p class="c-footer__txt">&#169; some All Rights Reserved.</p>
         </div>
         <div class="js-gotop">
             <a href="#wrapper">
-                <!-- シンプルな上向き矢印アロー（SVG内製） -->
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1a1311" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+                <!-- 上向きベクトルのインライン矢印SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1a1311" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:100%; height:100%;"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
             </a>
         </div>
     </footer>

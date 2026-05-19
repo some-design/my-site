@@ -6,13 +6,13 @@
     <title>some Inc. | Better for some</title>
     
     <!-- ==========================================================================
-       【重要】Adobe Fontsの連携コード（後であなた専用のコードに差し替えます）
-       ========================================================================== */ -->
-    <link rel="stylesheet" href="https://use.typekit.net/xyz1234.css"> <!-- xyz1234の部分を書き換えます -->
+       Adobe Fonts 連携コード（ご自身のIDに書き換えてください）
+       ========================================================================== -->
+    <link rel="stylesheet" href="https://use.typekit.net/xyz1234.css">
 
     <style>
         /* ==========================================================================
-           1. 基本設定（フォントをDIN 2014に指定）
+           1. 全体リセット & 共通設定
            ========================================================================== */
         * {
             margin: 0;
@@ -21,22 +21,23 @@
         }
 
         body {
-            /* 全体のフォントをDIN 2014に。英数字が美しい幾何学フォントになります */
-            font-family: "din-2014", "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            /* DIN 2014を最優先にし、日本語は洗練されたゴシック体に指定 */
+            font-family: "din-2014", "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
             background-color: #ffffff;
-            color: #111111;
-            line-height: 1.6;
+            color: #000000;
+            line-height: 1.7;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         a {
             color: inherit;
             text-decoration: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
         }
 
         a:hover {
-            opacity: 0.6;
+            opacity: 0.5;
         }
 
         li {
@@ -49,277 +50,345 @@
             display: block;
         }
 
-        .site-wrapper {
+        /* 画面全体のコンテナ（PC用） */
+        .site-container {
             display: flex;
             min-height: 100vh;
         }
 
         /* ==========================================================================
-           2. 左側：サイドナビゲーション
+           2. 左側：固定サイドバー（yaさん完全同一レイアウト）
            ========================================================================== */
         .sidebar {
-            width: 280px;
-            padding: 40px;
+            width: 300px;
+            height: 100vh;
             position: fixed;
             top: 0;
             left: 0;
-            height: 100vh;
+            padding: 60px 40px;
+            background-color: #ffffff;
+            border-right: 1px solid #e5e5e5; /* yaさんの繊細な縦仕切り線 */
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            background-color: #ffffff;
-            z-index: 100;
+            justify-content: space-between; /* 上・中・下へきれいに分散配置 */
+            z-index: 1000;
+        }
+
+        /* 上部：ロゴとタグライン */
+        .brand-zone {
+            display: block;
         }
 
         .logo a {
-            font-size: 26px;
-            font-weight: 700; /* DINの力強い太さ */
-            letter-spacing: 0.03em;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
             text-transform: lowercase;
+            line-height: 1.2;
         }
 
         .tagline {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 400;
-            color: #888888;
-            margin-top: 5px;
-            letter-spacing: 0.05em;
+            color: #999999;
+            margin-top: 6px;
+            letter-spacing: 0.06em;
         }
 
-        .nav-menu {
-            margin-top: 60px;
+        /* 中央：ナビゲーションメニュー */
+        .navigation {
+            margin-top: -40px; /* 少し上に引き上げて美しく配置 */
         }
 
-        .nav-menu li {
-            margin-bottom: 15px;
+        .nav-list li {
+            margin-bottom: 20px;
         }
 
-        .nav-menu a {
-            font-size: 15px;
+        .nav-list a {
+            font-size: 14px;
             font-weight: 400;
-            letter-spacing: 0.08em; /* DINが映える少し広めの文字間隔 */
+            letter-spacing: 0.1em; /* 幾何学フォントが映える広めの文字間 */
             text-transform: lowercase;
         }
 
+        /* 下部：フッター情報 */
         .sidebar-footer {
-            font-size: 11px;
-            color: #999999;
+            font-size: 10px;
+            color: #b0b0b0;
             letter-spacing: 0.05em;
         }
 
         /* ==========================================================================
-           3. 右側：メインコンテンツ（グリッドレイアウト）
+           3. 右側：メイン実績コンテンツ（yaさんグリッド）
            ========================================================================== */
         .main-content {
-            margin-left: 280px;
-            width: calc(100% - 280px);
-            padding: 40px;
+            margin-left: 300px; /* サイドバーの幅ときっちり合わせる */
+            width: calc(100% - 300px);
+            padding: 60px; /* 余裕のある高級感あふれる余白 */
         }
 
-        .project-grid {
+        /* フォトグリッド（完全な3列構成） */
+        .works-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 24px; /* 写真同士の間隔 */
         }
 
-        .project-item {
+        /* 各作品枠 */
+        .works-item {
             position: relative;
+            width: 100%;
+            aspect-ratio: 3 / 2; /* yaさんの写真比率を忠実に再現 */
+            background-color: #000000; /* ホバーで画像が引いたときの後景黒 */
             overflow: hidden;
-            background-color: #f7f7f7;
-            aspect-ratio: 4 / 3;
+            cursor: pointer;
         }
 
-        .project-item img {
+        /* 画像自体の動き */
+        .works-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
+            opacity: 1;
         }
 
-        .project-item:hover img {
-            transform: scale(1.03);
-        }
-
-        .project-overlay {
+        /* ホバー時のマスク（白半透明） */
+        .works-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.85); /* 高級感のある白マスク */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 30px;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
             text-align: center;
+            z-index: 2;
         }
 
-        .project-item:hover .project-overlay {
-            opacity: 1;
+        /* ホバーした時の連動アクション（yaさん完全再現） */
+        .works-item:hover img {
+            transform: scale(0.96); /* 画像が少しシュッと奥に引っ込む上品な動き */
+            opacity: 0.4;
         }
 
-        .project-title {
+        .works-item:hover .works-overlay {
+            opacity: 1; /* テキストがフワッと現れる */
+        }
+
+        /* テキストのスタイル */
+        .works-title {
             font-size: 15px;
             font-weight: 700;
-            color: #111111;
-            margin-bottom: 5px;
+            color: #000000;
+            margin-bottom: 6px;
             letter-spacing: 0.05em;
         }
 
-        .project-category {
+        .works-meta {
             font-size: 11px;
             font-weight: 400;
-            color: #777777;
+            color: #666666;
             text-transform: uppercase;
             letter-spacing: 0.08em;
         }
 
         /* ==========================================================================
-           4. レスポンシブ
+           4. レスポンシブレイアウト（スマホ・タブレット対応）
            ========================================================================== */
-        @media (max-width: 1024px) {
-            .project-grid {
+        
+        /* タブレット対応（画面が狭くなったら2列に） */
+        @media (max-width: 1100px) {
+            .works-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            .main-content {
+                padding: 40px;
             }
         }
 
+        /* スマホ対応（yaさんのスマホ表示を完全再現） */
         @media (max-width: 767px) {
-            .site-wrapper {
-                flex-direction: column;
+            .site-container {
+                flex-direction: column; /* 縦並びにスイッチ */
             }
 
+            /* サイドバーを上部ヘッダーに変形 */
             .sidebar {
                 position: relative;
                 width: 100%;
                 height: auto;
-                padding: 30px 20px;
-                border-bottom: 1px solid #eeeeee;
+                padding: 40px 24px 30px 24px;
+                border-right: none;
+                border-bottom: 1px solid #e5e5e5;
             }
 
-            .nav-menu {
-                margin-top: 25px;
+            .navigation {
+                margin-top: 30px;
+            }
+
+            .nav-list {
                 display: flex;
                 flex-wrap: wrap;
-                gap: 15px;
+                gap: 20px; /* メニューを横並びに */
             }
 
-            .nav-menu li {
+            .nav-list li {
                 margin-bottom: 0;
             }
 
             .sidebar-footer {
-                display: none;
+                display: none; /* 上部からはコピーライトを消す */
             }
 
+            /* メインコンテンツエリア */
             .main-content {
                 margin-left: 0;
                 width: 100%;
-                padding: 20px;
+                padding: 24px;
             }
 
-            .project-grid {
-                grid-template-columns: repeat(1, 1fr);
-                gap: 15px;
+            /* スマホは写真を1列にスッキリ並べる */
+            .works-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
             }
 
-            .project-overlay {
-                position: relative;
-                opacity: 1;
-                background-color: transparent;
-                padding: 10px 0 20px 0;
-                text-align: left;
-                align-items: flex-start;
-            }
-            .project-title {
-                font-size: 14px;
-            }
-            .project-item {
+            /* スマホ時は「ホバー（マウスを載せる）」が無いので、最初から写真の下に文字を出すyaさん仕様 */
+            .works-item {
                 height: auto;
                 aspect-ratio: auto;
                 background-color: transparent;
+                overflow: visible;
+            }
+
+            .works-item:hover img {
+                transform: none;
+                opacity: 1;
+            }
+
+            .works-overlay {
+                position: relative;
+                opacity: 1;
+                background-color: transparent;
+                padding: 12px 0 0 0;
+                text-align: left;
+                align-items: flex-start;
+            }
+
+            .works-title {
+                font-size: 14px;
+                margin-bottom: 2px;
+            }
+
+            .works-meta {
+                font-size: 10px;
+            }
+            
+            /* スマホ専用の最下部フッターを追加（yaさん構造） */
+            .mobile-footer {
+                display: block;
+                padding: 40px 24px;
+                border-top: 1px solid #e5e5e5;
+                font-size: 10px;
+                color: #b0b0b0;
+                letter-spacing: 0.05em;
+                text-align: center;
+            }
+        }
+
+        /* PC時はスマホ用フッターを隠す */
+        @media (min-width: 768px) {
+            .mobile-footer {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="site-wrapper">
+    <div class="site-container">
 
-        <!-- 左側：ナビゲーションバー -->
+        <!-- 左側：固定サイドバーエリア -->
         <header class="sidebar">
-            <div>
+            <div class="brand-zone">
                 <div class="logo">
                     <a href="#">some</a>
                 </div>
                 <div class="tagline">Better for some</div>
-                
-                <nav class="nav-menu">
-                    <ul>
-                        <li><a href="#">works</a></li>
-                        <li><a href="#">profile</a></li>
-                        <li><a href="#">contact</a></li>
-                        <li><a href="https://www.instagram.com/" target="_blank">instagram</a></li>
-                    </ul>
-                </nav>
             </div>
+            
+            <nav class="navigation">
+                <ul class="nav-list">
+                    <li><a href="#">works</a></li>
+                    <li><a href="#">profile</a></li>
+                    <li><a href="#">contact</a></li>
+                    <li><a href="https://www.instagram.com/" target="_blank">instagram</a></li>
+                </ul>
+            </nav>
             
             <div class="sidebar-footer">
                 <p>&copy; some All Rights Reserved.</p>
             </div>
         </header>
 
-        <!-- 右側：メインコンテンツ -->
+        <!-- 右側：メインコンテンツエリア -->
         <main class="main-content">
-            <div class="project-grid">
+            <div class="works-grid">
 
-                <div class="project-item">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Project 1">
-                    <div class="project-overlay">
-                        <div class="project-title">Project Name 01</div>
-                        <div class="project-category">Interior Design / Mortex</div>
+                <!-- 各プロジェクト：画像URLや文字は後から差し替え可能です -->
+                <div class="works-item">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80" alt="Project 01">
+                    <div class="works-overlay">
+                        <div class="works-title">Project Name 01</div>
+                        <div class="works-meta">Interior Design / Mortex</div>
                     </div>
                 </div>
 
-                <div class="project-item">
-                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="Project 2">
-                    <div class="project-overlay">
-                        <div class="project-title">Project Name 02</div>
-                        <div class="project-category">Architecture / Office</div>
+                <div class="works-item">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80" alt="Project 02">
+                    <div class="works-overlay">
+                        <div class="works-title">Project Name 02</div>
+                        <div class="works-meta">Architecture / Office</div>
                     </div>
                 </div>
 
-                <div class="project-item">
-                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80" alt="Project 3">
-                    <div class="project-overlay">
-                        <div class="project-title">Project Name 03</div>
-                        <div class="project-category">Interior / Pearl Stucco</div>
+                <div class="works-item">
+                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80" alt="Project 03">
+                    <div class="works-overlay">
+                        <div class="works-title">Project Name 03</div>
+                        <div class="works-meta">Interior / Pearl Stucco</div>
                     </div>
                 </div>
 
-                <div class="project-item">
-                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80" alt="Project 4">
-                    <div class="project-overlay">
-                        <div class="project-title">Project Name 04</div>
-                        <div class="project-category">Housing / D-Board</div>
+                <div class="works-item">
+                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=80" alt="Project 04">
+                    <div class="works-overlay">
+                        <div class="works-title">Project Name 04</div>
+                        <div class="works-meta">Housing / D-Board</div>
                     </div>
                 </div>
 
-                <div class="project-item">
-                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Project 5">
-                    <div class="project-overlay">
-                        <div class="project-title">Project Name 05</div>
-                        <div class="project-category">Commercial / Renovation</div>
+                <div class="works-item">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80" alt="Project 05">
+                    <div class="works-overlay">
+                        <div class="works-title">Project Name 05</div>
+                        <div class="works-meta">Commercial / Renovation</div>
                     </div>
                 </div>
 
-                <div class="project-item">
-                    <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=800&q=80" alt="Project 6">
-                    <div class="project-overlay">
-                        <div class="project-title">Project Name 06</div>
-                        <div class="project-category">Exhibition / Gallery</div>
+                <div class="works-item">
+                    <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=900&q=80" alt="Project 06">
+                    <div class="works-overlay">
+                        <div class="works-title">Project Name 06</div>
+                        <div class="works-meta">Exhibition / Gallery</div>
                     </div>
                 </div>
 
@@ -327,6 +396,11 @@
         </main>
 
     </div>
+
+    <!-- スマホ時のみ最下部に表示されるフッター（yaさん構造） -->
+    <footer class="mobile-footer">
+        <p>&copy; some All Rights Reserved.</p>
+    </footer>
 
 </body>
 </html>

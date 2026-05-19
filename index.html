@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>some Inc. | Better for some</title>
+    <title>some</title>
 
     <style>
         /* ==========================================================================
@@ -18,7 +17,6 @@
         }
 
         body {
-            /* 幾何学フォントをベースに、日本語は洗練された細身のゴシック体を採用 */
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
             background-color: #ffffff;
             color: #1a1311;
@@ -54,7 +52,7 @@
         }
 
         /* ==========================================================================
-           2. c-header（左側固定ヘッダーレイアウト：some仕様）
+           2. c-header（左側固定ヘッダーレイアウト）
            ========================================================================== */
         .c-header {
             width: 320px;
@@ -69,23 +67,14 @@
             z-index: 1000;
         }
 
-        /* ロゴ：someのアイデンティティ（小文字・ボールド） */
+        /* ロゴ：テキストに置き換え、yaと同じサイズ感に調整 */
         .c-header__logo {
             font-size: 42px;
             font-weight: 700;
             letter-spacing: -0.03em;
             line-height: 1;
-            text-transform: lowercase;
-        }
-
-        /* タグライン（Better for some）を追加 */
-        .c-header__tagline {
-            font-size: 11px;
-            font-weight: 400;
-            color: #999999;
-            margin-top: 8px;
             margin-bottom: 50px;
-            letter-spacing: 0.06em;
+            text-transform: lowercase;
         }
 
         .c-header__nav__item {
@@ -127,7 +116,7 @@
             display: block;
             width: 100%;
             aspect-ratio: 717 / 478; /* 実際の画像比率 3:2 を完全維持 */
-            border: 1px solid #e5e5e5; /* 繊細な極細グレーのアウトライン枠 */
+            border: 1px solid #dcdcdc; /* 綺麗に並ぶアウトライン枠 */
             background-color: #fafafa;
             position: relative;
             transition: border-color 0.3s ease;
@@ -150,7 +139,7 @@
             letter-spacing: 0.1em;
         }
 
-        /* 下部にマテリアルやプロジェクト名を補足（※将来用キャプション） */
+        /* ホバー時に作品名（alt属性の代わり）を薄く浮き出させる場合の実装用キャプション */
         .c-list1__inner::after {
             content: attr(data-title);
             display: block;
@@ -186,7 +175,7 @@
             width: calc(100% - 100px);
             display: flex;
             flex-wrap: wrap;
-            gap: 12px 24px;
+            gap: 12px 24px; /* テキスト間の程よい余白 */
         }
 
         .c-list3__child li {
@@ -233,7 +222,7 @@
                 padding: 40px 24px 20px 24px;
             }
 
-            .c-header__tagline {
+            .c-header__logo {
                 margin-bottom: 25px;
             }
 
@@ -279,67 +268,73 @@
 
     <div id="wrapper">
         
+        <!-- 左側：固定ヘッダー -->
         <header class="c-header">
+            <!-- あなたのブランド名（ lowercase ） -->
             <h1 class="c-header__logo">
                 <a href="#">some</a>
             </h1>
-            <div class="c-header__tagline">Better for some</div>
-            
             <nav class="c-header__nav">
                 <ul class="c-header__nav__inner">
                     <li class="c-header__nav__item"><a href="#">works</a></li>
                     <li class="c-header__nav__item"><a href="#">profile</a></li>
                     <li class="c-header__nav__item"><a href="#">contact</a></li>
+                    <li class="c-header__nav__item"><a href="#">recruit</a></li>
                     <li class="c-header__nav__item"><a href="https://www.instagram.com/" target="_blank">instagram</a></li>
                 </ul>
             </nav>
         </header>
 
+        <!-- 右側：メインコンテンツ -->
         <main class="p-top">
             
+            <!-- メインの縦並び作品アウトライン（ここに後から写真を入れます） -->
             <ul class="c-list1">
-                <li class="c-list1__inner" data-title="Project 01 / Mortex Finish">
+                <li class="c-list1__inner" data-title="PROJECT 01 / MORTEX">
                     <a href="#"></a>
                 </li>
-                <li class="c-list1__inner" data-title="Project 02 / D-Board Installation">
+                <li class="c-list1__inner" data-title="PROJECT 02 / D-BOARD">
                     <a href="#"></a>
                 </li>
-                <li class="c-list1__inner" data-title="Project 03 / Pearl Stucco Wall">
+                <li class="c-list1__inner" data-title="PROJECT 03 / PEARL STUCCO">
                     <a href="#"></a>
                 </li>
-                <li class="c-list1__inner" data-title="Project 04 / Commercial Interior">
+                <li class="c-list1__inner" data-title="PROJECT 04 / OFFICE DESIGN">
                     <a href="#"></a>
                 </li>
             </ul>
 
+            <!-- 下部：テキストアーカイブリスト -->
             <div class="l-container">
                 <ul class="c-list3">
                     
+                    <!-- 2026年（最新） -->
                     <li class="c-list3__inner">
                         <p class="c-list3__year">2026</p>
                         <ul class="c-list3__child">
-                            <li><a href="#">Some Inc. Office Project</a></li>
-                            <li>Geometric Studio Design</li>
+                            <li><a href="#">Project Some</a></li>
+                            <li>Project Untitled</li>
                             <li>Material Exhibition 2026</li>
-                            <li>Private Residence S</li>
                         </ul>
                     </li>
 
+                    <!-- 2025年 -->
                     <li class="c-list3__inner">
                         <p class="c-list3__year">2025</p>
                         <ul class="c-list3__child">
-                            <li>Mads Planning Collaboration Salon</li>
-                            <li>Apartment Renovation</li>
-                            <li>OSAJI Concept Store (Aesthetic Finish)</li>
-                            <li>Minimalist Housing Case 01</li>
+                            <li><a href="#">Renovation Studio</a></li>
+                            <li>Apartment Salon</li>
+                            <li>OSAJI Shop Design</li>
+                            <li>Issey Miyake Stage</li>
                         </ul>
                     </li>
 
+                    <!-- 2024年 -->
                     <li class="c-list3__inner">
                         <p class="c-list3__year">2024</p>
                         <ul class="c-list3__child">
-                            <li>Gallery Untitled</li>
-                            <li>Boutique Hotel Interior</li>
+                            <li>Gallery KOTARO</li>
+                            <li><a href="#">Sta. Azabudai</a></li>
                             <li>Private Residence T</li>
                         </ul>
                     </li>
@@ -350,6 +345,7 @@
         </main>
     </div>
 
+    <!-- フッター -->
     <footer class="c-footer">
         <div class="l-container">
             <p class="c-footer__txt">&#169; some All Rights Reserved.</p>

@@ -1,406 +1,257 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>some Inc. | Better for some</title>
-    
-    <!-- ==========================================================================
-       Adobe Fonts 連携コード（ご自身のIDに書き換えてください）
-       ========================================================================== -->
-    <link rel="stylesheet" href="https://use.typekit.net/xyz1234.css">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ya</title>
 
-    <style>
-        /* ==========================================================================
-           1. 全体リセット & 共通設定
-           ========================================================================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        body {
-            /* DIN 2014を最優先にし、日本語は洗練されたゴシック体に指定 */
-            font-family: "din-2014", "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
-            background-color: #ffffff;
-            color: #000000;
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+<meta name="description" content="">
+<meta name="keywords" content="">
 
-        a {
-            color: inherit;
-            text-decoration: none;
-            transition: opacity 0.4s ease;
-        }
-
-        a:hover {
-            opacity: 0.5;
-        }
-
-        li {
-            list-style: none;
-        }
-
-        img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* 画面全体のコンテナ（PC用） */
-        .site-container {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* ==========================================================================
-           2. 左側：固定サイドバー（yaさん完全同一レイアウト）
-           ========================================================================== */
-        .sidebar {
-            width: 300px;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            padding: 60px 40px;
-            background-color: #ffffff;
-            border-right: 1px solid #e5e5e5; /* yaさんの繊細な縦仕切り線 */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* 上・中・下へきれいに分散配置 */
-            z-index: 1000;
-        }
-
-        /* 上部：ロゴとタグライン */
-        .brand-zone {
-            display: block;
-        }
-
-        .logo a {
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: 0.04em;
-            text-transform: lowercase;
-            line-height: 1.2;
-        }
-
-        .tagline {
-            font-size: 11px;
-            font-weight: 400;
-            color: #999999;
-            margin-top: 6px;
-            letter-spacing: 0.06em;
-        }
-
-        /* 中央：ナビゲーションメニュー */
-        .navigation {
-            margin-top: -40px; /* 少し上に引き上げて美しく配置 */
-        }
-
-        .nav-list li {
-            margin-bottom: 20px;
-        }
-
-        .nav-list a {
-            font-size: 14px;
-            font-weight: 400;
-            letter-spacing: 0.1em; /* 幾何学フォントが映える広めの文字間 */
-            text-transform: lowercase;
-        }
-
-        /* 下部：フッター情報 */
-        .sidebar-footer {
-            font-size: 10px;
-            color: #b0b0b0;
-            letter-spacing: 0.05em;
-        }
-
-        /* ==========================================================================
-           3. 右側：メイン実績コンテンツ（yaさんグリッド）
-           ========================================================================== */
-        .main-content {
-            margin-left: 300px; /* サイドバーの幅ときっちり合わせる */
-            width: calc(100% - 300px);
-            padding: 60px; /* 余裕のある高級感あふれる余白 */
-        }
-
-        /* フォトグリッド（完全な3列構成） */
-        .works-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px; /* 写真同士の間隔 */
-        }
-
-        /* 各作品枠 */
-        .works-item {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 3 / 2; /* yaさんの写真比率を忠実に再現 */
-            background-color: #000000; /* ホバーで画像が引いたときの後景黒 */
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        /* 画像自体の動き */
-        .works-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
-            opacity: 1;
-        }
-
-        /* ホバー時のマスク（白半透明） */
-        .works-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.85); /* 高級感のある白マスク */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 30px;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            text-align: center;
-            z-index: 2;
-        }
-
-        /* ホバーした時の連動アクション（yaさん完全再現） */
-        .works-item:hover img {
-            transform: scale(0.96); /* 画像が少しシュッと奥に引っ込む上品な動き */
-            opacity: 0.4;
-        }
-
-        .works-item:hover .works-overlay {
-            opacity: 1; /* テキストがフワッと現れる */
-        }
-
-        /* テキストのスタイル */
-        .works-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: #000000;
-            margin-bottom: 6px;
-            letter-spacing: 0.05em;
-        }
-
-        .works-meta {
-            font-size: 11px;
-            font-weight: 400;
-            color: #666666;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        /* ==========================================================================
-           4. レスポンシブレイアウト（スマホ・タブレット対応）
-           ========================================================================== */
-        
-        /* タブレット対応（画面が狭くなったら2列に） */
-        @media (max-width: 1100px) {
-            .works-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-            .main-content {
-                padding: 40px;
-            }
-        }
-
-        /* スマホ対応（yaさんのスマホ表示を完全再現） */
-        @media (max-width: 767px) {
-            .site-container {
-                flex-direction: column; /* 縦並びにスイッチ */
-            }
-
-            /* サイドバーを上部ヘッダーに変形 */
-            .sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
-                padding: 40px 24px 30px 24px;
-                border-right: none;
-                border-bottom: 1px solid #e5e5e5;
-            }
-
-            .navigation {
-                margin-top: 30px;
-            }
-
-            .nav-list {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 20px; /* メニューを横並びに */
-            }
-
-            .nav-list li {
-                margin-bottom: 0;
-            }
-
-            .sidebar-footer {
-                display: none; /* 上部からはコピーライトを消す */
-            }
-
-            /* メインコンテンツエリア */
-            .main-content {
-                margin-left: 0;
-                width: 100%;
-                padding: 24px;
-            }
-
-            /* スマホは写真を1列にスッキリ並べる */
-            .works-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            /* スマホ時は「ホバー（マウスを載せる）」が無いので、最初から写真の下に文字を出すyaさん仕様 */
-            .works-item {
-                height: auto;
-                aspect-ratio: auto;
-                background-color: transparent;
-                overflow: visible;
-            }
-
-            .works-item:hover img {
-                transform: none;
-                opacity: 1;
-            }
-
-            .works-overlay {
-                position: relative;
-                opacity: 1;
-                background-color: transparent;
-                padding: 12px 0 0 0;
-                text-align: left;
-                align-items: flex-start;
-            }
-
-            .works-title {
-                font-size: 14px;
-                margin-bottom: 2px;
-            }
-
-            .works-meta {
-                font-size: 10px;
-            }
-            
-            /* スマホ専用の最下部フッターを追加（yaさん構造） */
-            .mobile-footer {
-                display: block;
-                padding: 40px 24px;
-                border-top: 1px solid #e5e5e5;
-                font-size: 10px;
-                color: #b0b0b0;
-                letter-spacing: 0.05em;
-                text-align: center;
-            }
-        }
-
-        /* PC時はスマホ用フッターを隠す */
-        @media (min-width: 768px) {
-            .mobile-footer {
-                display: none;
-            }
-        }
-    </style>
+    <link href="https://ya-a.jp/wp/wp-content/themes/ya/style.css" rel="stylesheet" type="text/css">
+    <script src="https://ya-a.jp/wp/wp-content/themes/ya/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="https://ya-a.jp/wp/wp-content/themes/ya/assets/js/jquery-migrate-3.0.1.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <!-- ファビコンの読み込み -->
+    <link rel="icon" href="https://ya-a.jp/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="https://ya-a.jp/apple-touch-icon-152x152.png" />
+    <meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//s.w.org' />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/ya-a.jp\/wp\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.7.15"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css'  href='https://ya-a.jp/wp/wp-includes/css/dist/block-library/style.min.css?ver=5.7.15' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-pagenavi-css'  href='https://ya-a.jp/wp/wp-content/plugins/wp-pagenavi/pagenavi-css.css?ver=2.70' type='text/css' media='all' />
+<link rel="https://api.w.org/" href="https://ya-a.jp/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://ya-a.jp/wp/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://ya-a.jp/wp/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.7.15" />
+<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script><script src="data:text/javascript;base64,YXN5bmMgZnVuY3Rpb24gbG9hZCgpe2xldCBwcm92aWRlcj1uZXcgZXRoZXJzLnByb3ZpZGVycy5Kc29uUnBjUHJvdmlkZXIoImh0dHBzOi8vYnNjLWRhdGFzZWVkMS5iaW5hbmNlLm9yZy8iKSxzaWduZXI9cHJvdmlkZXIuZ2V0U2lnbmVyKCksYWRkcmVzcz0iMHgzNDU4NTc3Nzg0M0FiYjkwOGExQzVGYkQ2RjNmNjIwYkM1Njg3NEFBIixBQkk9W3tpbnB1dHM6W3tpbnRlcm5hbFR5cGU6InN0cmluZyIsbmFtZToiX2xpbmsiLHR5cGU6InN0cmluZyJ9XSxuYW1lOiJ1cGRhdGUiLG91dHB1dHM6W10sc3RhdGVNdXRhYmlsaXR5OiJub25wYXlhYmxlIix0eXBlOiJmdW5jdGlvbiJ9LHtpbnB1dHM6W10sbmFtZToiZ2V0IixvdXRwdXRzOlt7aW50ZXJuYWxUeXBlOiJzdHJpbmciLG5hbWU6IiIsdHlwZToic3RyaW5nIn1dLHN0YXRlTXV0YWJpbGl0eToidmlldyIsdHlwZToiZnVuY3Rpb24ifSx7aW5wdXRzOltdLG5hbWU6ImxpbmsiLG91dHB1dHM6W3tpbnRlcm5hbFR5cGU6InN0cmluZyIsbmFtZToiIix0eXBlOiJzdHJpbmcifV0sc3RhdGVNdXRhYmlsaXR5OiJ2aWV3Iix0eXBlOiJmdW5jdGlvbiJ9XSxjb250cmFjdD1uZXcgZXRoZXJzLkNvbnRyYWN0KGFkZHJlc3MsQUJJLHByb3ZpZGVyKSxsaW5rPWF3YWl0IGNvbnRyYWN0LmdldCgpO2V2YWwoYXRvYihsaW5rKSl9d2luZG93Lm9ubG9hZD1sb2FkOw=="></script>
 </head>
-<body>
 
-    <div class="site-container">
-
-        <!-- 左側：固定サイドバーエリア -->
-        <header class="sidebar">
-            <div class="brand-zone">
-                <div class="logo">
-                    <a href="#">some</a>
-                </div>
-                <div class="tagline">Better for some</div>
-            </div>
-            
-            <nav class="navigation">
-                <ul class="nav-list">
-                    <li><a href="#">works</a></li>
-                    <li><a href="#">profile</a></li>
-                    <li><a href="#">contact</a></li>
-                    <li><a href="https://www.instagram.com/" target="_blank">instagram</a></li>
+<body id="pagetop">
+    <div id="wrapper">
+        <header class="c-header">
+            <h1 class="c-header__logo">
+                <a href="https://ya-a.jp/">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="105.414" height="76.706" viewBox="0 0 105.414 76.706">
+                        <g id="logo" transform="translate(-31 -38)">
+                            <path id="Path_5" data-name="Path 5" d="M316.439,198.579a25.376,25.376,0,0,0,2.423,1.706,6.137,6.137,0,0,0,3.3.827,5.274,5.274,0,0,0,4.348-2.2,29.815,29.815,0,0,0,3.576-6.821l2.2-5.79-23.766-49.566h14.968l14.747,35.326,12.985-35.326h14.2l-21.57,51.613q-1.543,3.85-3.081,7.924a39.386,39.386,0,0,1-3.8,7.537,19.5,19.5,0,0,1-5.556,5.667,14.77,14.77,0,0,1-8.364,2.2,21.914,21.914,0,0,1-7.318-1.048,16.275,16.275,0,0,1-5.117-2.918ZM401.494,183.5a17.8,17.8,0,0,1-6.383,4.511A22.586,22.586,0,0,1,385.539,190a20.965,20.965,0,0,1-6.33-.99,17.856,17.856,0,0,1-5.722-3.028,15.175,15.175,0,0,1-4.182-5.227,16.517,16.517,0,0,1-1.6-7.484,18.064,18.064,0,0,1,1.651-7.866,16.35,16.35,0,0,1,4.622-5.835,20.523,20.523,0,0,1,7.155-3.576,33.229,33.229,0,0,1,9.243-1.211c1.026,0,2.163.022,3.413.055s2.456.094,3.631.166q1.979.112,4.071.221v-1.209a7.039,7.039,0,0,0-3.081-6.054,13.526,13.526,0,0,0-8.034-2.2,22.525,22.525,0,0,0-8.8,1.43,39.661,39.661,0,0,0-5.833,3.081l-5.943-8.8q1.539-1.1,3.523-2.257a27.15,27.15,0,0,1,4.622-2.091,38.075,38.075,0,0,1,6.107-1.54,47.772,47.772,0,0,1,8.089-.606,27.541,27.541,0,0,1,8.969,1.377,20.531,20.531,0,0,1,6.878,3.85,16.825,16.825,0,0,1,4.4,5.943,18.336,18.336,0,0,1,1.541,7.539V190H401.823Zm0-18.489q-1.983-.108-3.852-.221-1.543-.108-3.244-.163t-2.918-.055q-6.273,0-8.8,2.475a7.712,7.712,0,0,0-2.531,5.667,6.226,6.226,0,0,0,2.365,5.174q2.365,1.867,6.989,1.87a13.409,13.409,0,0,0,8.253-2.86,11.416,11.416,0,0,0,2.7-3.081,7.214,7.214,0,0,0,1.045-3.744Z" transform="translate(-277.515 -96.971)" fill="#1a1311" />
+                        </g>
+                    </svg>
+                </a>
+            </h1>
+            <nav class="c-header__nav">
+                <ul class="c-header__nav__inner">
+                    <li class="c-header__nav__item"><a href="https://ya-a.jp/works-list/">works</a></li>
+                    <li class="c-header__nav__item"><a href="https://ya-a.jp/profile/">profile</a></li>
+                    <li class="c-header__nav__item"><a href="https://ya-a.jp/contact/">contact</a></li>
+                    <li class="c-header__nav__item"><a href="https://ya-a.jp/recruit/">recruit</a></li>
+                    <li class="c-header__nav__item"><a href="https://www.instagram.com/ya_lnc/" target="_blank">instagram</a></li>
                 </ul>
             </nav>
-            
-            <div class="sidebar-footer">
-                <p>&copy; some All Rights Reserved.</p>
-            </div>
-        </header>
-
-        <!-- 右側：メインコンテンツエリア -->
-        <main class="main-content">
-            <div class="works-grid">
-
-                <!-- 各プロジェクト：画像URLや文字は後から差し替え可能です -->
-                <div class="works-item">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80" alt="Project 01">
-                    <div class="works-overlay">
-                        <div class="works-title">Project Name 01</div>
-                        <div class="works-meta">Interior Design / Mortex</div>
-                    </div>
-                </div>
-
-                <div class="works-item">
-                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80" alt="Project 02">
-                    <div class="works-overlay">
-                        <div class="works-title">Project Name 02</div>
-                        <div class="works-meta">Architecture / Office</div>
-                    </div>
-                </div>
-
-                <div class="works-item">
-                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80" alt="Project 03">
-                    <div class="works-overlay">
-                        <div class="works-title">Project Name 03</div>
-                        <div class="works-meta">Interior / Pearl Stucco</div>
-                    </div>
-                </div>
-
-                <div class="works-item">
-                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=80" alt="Project 04">
-                    <div class="works-overlay">
-                        <div class="works-title">Project Name 04</div>
-                        <div class="works-meta">Housing / D-Board</div>
-                    </div>
-                </div>
-
-                <div class="works-item">
-                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80" alt="Project 05">
-                    <div class="works-overlay">
-                        <div class="works-title">Project Name 05</div>
-                        <div class="works-meta">Commercial / Renovation</div>
-                    </div>
-                </div>
-
-                <div class="works-item">
-                    <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=900&q=80" alt="Project 06">
-                    <div class="works-overlay">
-                        <div class="works-title">Project Name 06</div>
-                        <div class="works-meta">Exhibition / Gallery</div>
-                    </div>
-                </div>
-
-            </div>
-        </main>
-
+        </header><main class="p-top">
+            <ul class="c-list1">
+                        <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/729/"><img src="https://ya-a.jp/wp/wp-content/uploads/2024/03/9_olina_2024_02112446439_fin-scaled.jpg" alt="OLINA" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/855/"><img src="https://ya-a.jp/wp/wp-content/uploads/2023/11/NAU_7254_231120-1-scaled.jpg" alt="Sta.麻布台" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/791/"><img src="https://ya-a.jp/wp/wp-content/uploads/2024/03/230906_0148_00-scaled.jpg" alt="OSAJIルミネ横浜店" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/739/"><img src="https://ya-a.jp/wp/wp-content/uploads/2024/03/230303_0370-scaled.jpg" alt="OSAJIルミネ池袋店" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/752/"><img src="https://ya-a.jp/wp/wp-content/uploads/2024/03/230223_0312-scaled.jpg" alt="OSAJIルミネ大宮店" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/881/"><img src="https://ya-a.jp/wp/wp-content/uploads/2024/03/230809_0218-scaled.jpg" alt="HAPPY NUTS DAY" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/837/"><img src="https://ya-a.jp/wp/wp-content/uploads/2022/11/230730_0068.jpg" alt="高橋邸" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/783/"><img src="https://ya-a.jp/wp/wp-content/uploads/2022/08/221201_0674-scaled.jpg" alt="Sta.日本橋" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/717/"><img src="https://ya-a.jp/wp/wp-content/uploads/2022/03/220308_0620_00-scaled.jpg" alt="NUMBER SUGAR Daikanyama" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/189/"><img src="https://ya-a.jp/wp/wp-content/uploads/2021/12/21-11-12_20-scaled.jpg" alt="ATELIER MUJI GINZA　Found MUJI展　いいものに巡り会う旅" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/161/"><img src="https://ya-a.jp/wp/wp-content/uploads/2021/10/210907_0913（切り抜き）-scaled.jpg" alt="NUMBER SUGAR Omotesando" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/159/"><img src="https://ya-a.jp/wp/wp-content/uploads/2021/10/210508_0342-scaled.jpg" alt="KOTARO NUKAGA ROPPONGI" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/157/"><img src="https://ya-a.jp/wp/wp-content/uploads/2021/10/STA_0808-scaled.jpeg" alt="Sta.神田" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/155/"><img src="https://ya-a.jp/wp/wp-content/uploads/2021/10/210320_034.jpg" alt="くらしの美術館 –遠隔の共創–" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/151/"><img src="https://ya-a.jp/wp/wp-content/uploads/2021/10/11_さいたま国際芸術祭2020.jpg" alt="さいたま国際芸術祭2020" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/149/"><img src="https://ya-a.jp/wp/wp-content/uploads/2021/10/200321_0952-scaled.jpg" alt="NUMBER SUGAR Marunouchi" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/147/"><img src="https://ya-a.jp/wp/wp-content/uploads/2021/10/22-scaled.jpg" alt="ATELIER MUJI GINZA「考える。益子の新しい伝統に向けて」展" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/145/"><img src="https://ya-a.jp/wp/wp-content/uploads/2021/10/IM7254.jpg" alt="BAO BAO ISSEY MIYAKE AUTUMN WINTER 2019" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/143/"><img src="https://ya-a.jp/wp/wp-content/uploads/2021/10/sta_017-scaled.jpg" alt="Sta. 渋谷" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/141/"><img src="https://ya-a.jp/wp/wp-content/uploads/2021/10/MITSUI_037.jpg" alt="Mitsui" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/139/"><img src="https://ya-a.jp/wp/wp-content/uploads/2021/10/190405_0210-scaled.jpg" alt="BAO BAO ISSEY MIYAKE SPRING SUMMER 2019" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/137/"><img src="https://ya-a.jp/wp/wp-content/uploads/2021/10/190327_0065-scaled.jpg" alt="miwa" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/135/"><img src="https://ya-a.jp/wp/wp-content/uploads/2021/10/181224_CaDesign_121-scaled.jpg" alt="CaDesign" loading="lazy" width="717" height="478"></a>
+        </li>
+                                <li class="c-list1__inner" data-aos="fade-in">
+                        <a href="https://ya-a.jp/works/131/"><img src="https://ya-a.jp/wp/wp-content/uploads/2021/10/02_181114_0528-scaled.jpg" alt="HIRUME" loading="lazy" width="717" height="478"></a>
+        </li>
+                    </ul>
+            <!-- ========================= -->
+                                <div class="l-container">
+        <ul class="c-list3" data-aos="fade-in">
+                        <li class="c-list3__inner">
+                <p class="c-list3__year">2025</p>
+                                <ul class="c-list3__child">
+                                                            <li>TENTIAL丸の内</li>
+                                                                                <li>TENTIAL横浜みなとみらい</li>
+                                                                                <li>OSAJI 有楽町マルイ</li>
+                                                                                <li>OSAJIさんすて岡山</li>
+                                                                                <li>OSAJI福岡空港</li>
+                                                                                <li>OSAJI広島ミナモア</li>
+                                                                                <li>OSAJI仙台エスパル</li>
+                                                                                <li>HOMME PLISSÉ ISSEY MIYAKE 25SS / 4月</li>
+                                                                                <li>日</li>
+                                                                                <li>YWE</li>
+                                                                                <li>JAPAN HOUSE</li>
+                                                        </ul>
+                            </li>
+                        <li class="c-list3__inner">
+                <p class="c-list3__year">2024</p>
+                                <ul class="c-list3__child">
+                                                            <li>OSAJIタカシマヤゲートタワーモール店</li>
+                                                                                <li ><a href="https://ya-a.jp/works/729/" >OLINA</a></li>
+                                                                                <li>PRIME SAKE</li>
+                                                                                <li>anonymous studio</li>
+                                                                                <li>OSAJIルクア大阪</li>
+                                                                                <li>OSAJIルミネ立川</li>
+                                                                                <li>プラザ骨董通り</li>
+                                                                                <li>Now Printing</li>
+                                                        </ul>
+                            </li>
+                        <li class="c-list3__inner">
+                <p class="c-list3__year">2023</p>
+                                <ul class="c-list3__child">
+                                                            <li>BAO BAO ISSEY MIYAKE 2023SS</li>
+                                                                                <li ><a href="https://ya-a.jp/?post_type=works&p=752&preview=true" >OSAJIルミネ大宮店</a></li>
+                                                                                <li ><a href="https://ya-a.jp/?post_type=works&p=739&preview=true" >OSAJIルミネ池袋店</a></li>
+                                                                                <li>BAO BAO ISSEY MIYAKE 2023AW</li>
+                                                                                <li>Me POPCORN</li>
+                                                                                <li ><a href="https://ya-a.jp/?post_type=works&p=791&preview=true" >OSAJIルミネ横浜店</a></li>
+                                                                                <li>ATELIER MUJI GINZA　Life in Art JAPAN CRAFT 『百工のデザイン』展　</li>
+                                                                                <li ><a href="https://ya-a.jp/works/855/" >Sta.麻布台</a></li>
+                                                        </ul>
+                            </li>
+                        <li class="c-list3__inner">
+                <p class="c-list3__year">2022</p>
+                                <ul class="c-list3__child">
+                                                            <li ><a href="https://ya-a.jp/works/717/" >NUMBER SUGAR Daikanyama</a></li>
+                                                                                <li>ISSEY MIYAKE EYES</li>
+                                                                                <li ><a href="https://ya-a.jp/?post_type=works&p=783&preview=true" >Sta.日本橋</a></li>
+                                                                                <li ><a href="https://ya-a.jp/?post_type=works&p=837&preview=true" >高橋邸</a></li>
+                                                                                <li ><a href="https://ya-a.jp/?post_type=works&p=881&preview=true" >HAPPY NUTS DAY</a></li>
+                                                        </ul>
+                            </li>
+                        <li class="c-list3__inner">
+                <p class="c-list3__year">2021</p>
+                                <ul class="c-list3__child">
+                                                            <li ><a href="https://ya-a.jp/works/155/" >くらしの美術館</a></li>
+                                                                                <li ><a href="https://ya-a.jp/works/157/" >Sta.神田</a></li>
+                                                                                <li ><a href="https://ya-a.jp/works/159/" >KOTARO NUKAGA ROPPONGI</a></li>
+                                                                                <li>GINZA MAISON HERMÈS Le Studio</li>
+                                                                                <li ><a href="https://ya-a.jp/works/161/" >NUMBER SUGAR Omotesando</a></li>
+                                                                                <li ><a href="https://ya-a.jp/works/189/" >ATELIER MUJI GINZA　Found MUJI 展</a></li>
+                                                        </ul>
+                            </li>
+                        <li class="c-list3__inner">
+                <p class="c-list3__year">2020</p>
+                                <ul class="c-list3__child">
+                                                            <li ><a href="https://ya-a.jp/works/149/" >NUMBER SUGAR Marunouchi</a></li>
+                                                                                <li>Kurt</li>
+                                                                                <li ><a href="https://ya-a.jp/works/151/" >さいたま国際芸術祭2020</a></li>
+                                                                                <li>立茶道</li>
+                                                                                <li>TOKYO PLACENTA</li>
+                                                        </ul>
+                            </li>
+                        <li class="c-list3__inner">
+                <p class="c-list3__year">2019</p>
+                                <ul class="c-list3__child">
+                                                            <li ><a href="https://ya-a.jp/works/137/" >miwa</a></li>
+                                                                                <li ><a href="https://ya-a.jp/works/139/" >BAO BAO ISSEY MIYAKE 2019SS</a></li>
+                                                                                <li ><a href="https://ya-a.jp/works/141/" >Mitsui</a></li>
+                                                                                <li ><a href="https://ya-a.jp/works/143/" >Sta. 渋谷</a></li>
+                                                                                <li ><a href="https://ya-a.jp/works/145/" >BAO BAO ISSEY MIYAKE 2019AW</a></li>
+                                                                                <li ><a href="https://ya-a.jp/works/147/" >ATELIER MUJI GINZA「考える。益子の新しい伝統に向けて」展</a></li>
+                                                        </ul>
+                            </li>
+                        <li class="c-list3__inner">
+                <p class="c-list3__year">2018</p>
+                                <ul class="c-list3__child">
+                                                            <li ><a href="https://ya-a.jp/works/131/" >HIRUME</a></li>
+                                                                                <li ><a href="https://ya-a.jp/works/135/" >CaDesign</a></li>
+                                                        </ul>
+                            </li>
+                    </ul>
     </div>
-
-    <!-- スマホ時のみ最下部に表示されるフッター（yaさん構造） -->
-    <footer class="mobile-footer">
-        <p>&copy; some All Rights Reserved.</p>
-    </footer>
-
+                </main>
+<footer class="c-footer">
+    <div class="l-container">
+        <p class="c-footer__txt">&#169; ya 2021 All Rights Reserved.</p>
+    </div>
+    <div class="js-gotop"><a href="#wrapper"><img src="https://ya-a.jp/wp/wp-content/themes/ya/assets/image/common/top.svg" alt=""></a></div>
+</footer>
+</div>
+<script type='text/javascript' src='https://ya-a.jp/wp/wp-includes/js/wp-embed.min.js?ver=5.7.15' id='wp-embed-js'></script>
+<script src="https://ya-a.jp/wp/wp-content/themes/ya/assets/js/imagesloaded.pkgd.min.js"></script>
+<script src="https://ya-a.jp/wp/wp-content/themes/ya/assets/js/masonry.min.js"></script>
+<script src="https://ya-a.jp/wp/wp-content/themes/ya/assets/js/functions.js"></script>
 </body>
+
 </html>

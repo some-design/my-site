@@ -1,14 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="format-detection" content="telephone=no">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>some</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>some | Better for some</title>
+
+    <meta name="description" content="some Inc. | Better for some">
+    <meta name="keywords" content="some,インテリアデザイン,空間デザイン,建築">
 
     <style>
         /* ==========================================================================
-           1. ベースリセット＆共通スタイル（yaの空気感を再現する余白とフォント設定）
+           1. ベースリセット＆共通スタイル（ミニマルで構造的な空間美を表現）
            ========================================================================== */
         * {
             margin: 0;
@@ -38,7 +42,12 @@
             list-style: none;
         }
 
-        /* 全体を包むコンテナ */
+        img {
+            max-width: 100%;
+            height: auto;
+            vertical-align: bottom;
+        }
+
         #wrapper {
             display: flex;
             width: 100%;
@@ -47,12 +56,12 @@
 
         .l-container {
             width: 100%;
-            max-width: 717px; /* 実際のメイン画像最大幅に最適化 */
+            max-width: 717px;
             margin: 0 auto;
         }
 
         /* ==========================================================================
-           2. c-header（左側固定ヘッダーレイアウト）
+           2. c-header（左側固定ヘッダー：some仕様）
            ========================================================================== */
         .c-header {
             width: 320px;
@@ -67,14 +76,23 @@
             z-index: 1000;
         }
 
-        /* ロゴ：テキストに置き換え、yaと同じサイズ感に調整 */
+        /* ロゴ：幾何学的かつ芯のある美しさを表現する小文字ボールド */
         .c-header__logo {
             font-size: 42px;
             font-weight: 700;
             letter-spacing: -0.03em;
             line-height: 1;
-            margin-bottom: 50px;
             text-transform: lowercase;
+        }
+
+        /* フィロソフィー：ロゴに美しく寄り添うタイポグラフィ */
+        .c-header__tagline {
+            font-size: 11px;
+            font-weight: 400;
+            color: #999999;
+            margin-top: 8px;
+            margin-bottom: 50px;
+            letter-spacing: 0.06em;
         }
 
         .c-header__nav__item {
@@ -89,10 +107,10 @@
         }
 
         /* ==========================================================================
-           3. p-top / c-list1（右側コンテンツ：画像アウトラインエリア）
+           3. p-top / c-list1（右側コンテンツ：作品画像エリア）
            ========================================================================== */
         .p-top {
-            margin-left: 320px; /* ヘッダーの幅分を確保 */
+            margin-left: 320px;
             width: calc(100% - 320px);
             padding: 70px 60px 120px 20px;
         }
@@ -102,21 +120,21 @@
             max-width: 717px;
             display: flex;
             flex-direction: column;
-            gap: 40px; /* 画像同士の垂直方向の美しい余白 */
+            gap: 40px;
             margin-bottom: 90px;
         }
 
-        /* 画像の代わりとなるアウトラインプレースホルダー */
         .c-list1__inner {
             width: 100%;
             position: relative;
         }
 
+        /* 本番画像が入るまでのアウトラインプレースホルダー（比率 3:2 維持） */
         .c-list1__inner a {
             display: block;
             width: 100%;
-            aspect-ratio: 717 / 478; /* 実際の画像比率 3:2 を完全維持 */
-            border: 1px solid #dcdcdc; /* 綺麗に並ぶアウトライン枠 */
+            aspect-ratio: 717 / 478;
+            border: 1px solid #e5e5e5;
             background-color: #fafafa;
             position: relative;
             transition: border-color 0.3s ease;
@@ -127,9 +145,8 @@
             border-color: #1a1311;
         }
 
-        /* 写真を入れる場所がわかりやすいようにラベルを表示 */
         .c-list1__inner a::before {
-            content: "IMAGE OUTLINE";
+            content: "IMAGE PLACEHOLDER";
             position: absolute;
             top: 50%;
             left: 50%;
@@ -139,7 +156,7 @@
             letter-spacing: 0.1em;
         }
 
-        /* ホバー時に作品名（alt属性の代わり）を薄く浮き出させる場合の実装用キャプション */
+        /* 空間の素材や計画内容を引き立てるキャプション */
         .c-list1__inner::after {
             content: attr(data-title);
             display: block;
@@ -150,7 +167,7 @@
         }
 
         /* ==========================================================================
-           4. c-list3（下部：年別プロジェクトアーカイブ）
+           4. c-list3（下部：年別プロジェクトテキストアーカイブ）
            ========================================================================== */
         .c-list3 {
             width: 100%;
@@ -175,7 +192,7 @@
             width: calc(100% - 100px);
             display: flex;
             flex-wrap: wrap;
-            gap: 12px 24px; /* テキスト間の程よい余白 */
+            gap: 12px 24px;
         }
 
         .c-list3__child li {
@@ -199,6 +216,9 @@
             margin-left: 320px;
             width: calc(100% - 320px);
             padding: 0 60px 60px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .c-footer__txt {
@@ -207,8 +227,19 @@
             letter-spacing: 0.05em;
         }
 
+        .js-gotop a {
+            display: block;
+            width: 24px;
+            height: 24px;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+        .js-gotop a:hover {
+            opacity: 1;
+        }
+
         /* ==========================================================================
-           6. レスポンシブ（スマホ表示への完全対応）
+           6. レスポンシブ（スマートフォン表示対応）
            ========================================================================== */
         @media (max-width: 900px) {
             #wrapper {
@@ -222,7 +253,7 @@
                 padding: 40px 24px 20px 24px;
             }
 
-            .c-header__logo {
+            .c-header__tagline {
                 margin-bottom: 25px;
             }
 
@@ -260,6 +291,7 @@
                 margin-left: 0;
                 width: 100%;
                 padding: 0 24px 40px 24px;
+                flex-direction: row;
             }
         }
     </style>
@@ -270,16 +302,16 @@
         
         <!-- 左側：固定ヘッダー -->
         <header class="c-header">
-            <!-- あなたのブランド名（ lowercase ） -->
             <h1 class="c-header__logo">
                 <a href="#">some</a>
             </h1>
+            <div class="c-header__tagline">Better for some</div>
+            
             <nav class="c-header__nav">
                 <ul class="c-header__nav__inner">
                     <li class="c-header__nav__item"><a href="#">works</a></li>
                     <li class="c-header__nav__item"><a href="#">profile</a></li>
                     <li class="c-header__nav__item"><a href="#">contact</a></li>
-                    <li class="c-header__nav__item"><a href="#">recruit</a></li>
                     <li class="c-header__nav__item"><a href="https://www.instagram.com/" target="_blank">instagram</a></li>
                 </ul>
             </nav>
@@ -288,33 +320,41 @@
         <!-- 右側：メインコンテンツ -->
         <main class="p-top">
             
-            <!-- メインの縦並び作品アウトライン（ここに後から写真を入れます） -->
+            <!-- メインビジュアル / 作品リスト（※画像パスが入るとアウトライン内に写真が描写されます） -->
             <ul class="c-list1">
-                <li class="c-list1__inner" data-title="PROJECT 01 / MORTEX">
-                    <a href="#"></a>
+                <li class="c-list1__inner" data-title="PROJECT 01 / MORTEX FINISH">
+                    <a href="#">
+                        <!-- <img src="images/work01.jpg" alt="PROJECT 01" loading="lazy" width="717" height="478"> -->
+                    </a>
                 </li>
-                <li class="c-list1__inner" data-title="PROJECT 02 / D-BOARD">
-                    <a href="#"></a>
+                <li class="c-list1__inner" data-title="PROJECT 02 / D-BOARD WALL PANEL">
+                    <a href="#">
+                        <!-- <img src="images/work02.jpg" alt="PROJECT 02" loading="lazy" width="717" height="478"> -->
+                    </a>
                 </li>
-                <li class="c-list1__inner" data-title="PROJECT 03 / PEARL STUCCO">
-                    <a href="#"></a>
+                <li class="c-list1__inner" data-title="PROJECT 03 / PEARL STUCCO WALL">
+                    <a href="#">
+                        <!-- <img src="images/work03.jpg" alt="PROJECT 03" loading="lazy" width="717" height="478"> -->
+                    </a>
                 </li>
-                <li class="c-list1__inner" data-title="PROJECT 04 / OFFICE DESIGN">
-                    <a href="#"></a>
+                <li class="c-list1__inner" data-title="PROJECT 04 / SPACE DESIGN PLAN">
+                    <a href="#">
+                        <!-- <img src="images/work04.jpg" alt="PROJECT 04" loading="lazy" width="717" height="478"> -->
+                    </a>
                 </li>
             </ul>
 
-            <!-- 下部：テキストアーカイブリスト -->
+            <!-- 下部：テキストアーカイブリスト（someの実績プレースホルダー） -->
             <div class="l-container">
                 <ul class="c-list3">
                     
-                    <!-- 2026年（最新） -->
+                    <!-- 2026年 -->
                     <li class="c-list3__inner">
                         <p class="c-list3__year">2026</p>
                         <ul class="c-list3__child">
-                            <li><a href="#">Project Some</a></li>
-                            <li>Project Untitled</li>
-                            <li>Material Exhibition 2026</li>
+                            <li><a href="#">Some Inc. Project</a></li>
+                            <li>Structural Aesthetics Studio</li>
+                            <li>Material Study Exhibition 2026</li>
                         </ul>
                     </li>
 
@@ -322,20 +362,10 @@
                     <li class="c-list3__inner">
                         <p class="c-list3__year">2025</p>
                         <ul class="c-list3__child">
-                            <li><a href="#">Renovation Studio</a></li>
-                            <li>Apartment Salon</li>
-                            <li>OSAJI Shop Design</li>
-                            <li>Issey Miyake Stage</li>
-                        </ul>
-                    </li>
-
-                    <!-- 2024年 -->
-                    <li class="c-list3__inner">
-                        <p class="c-list3__year">2024</p>
-                        <ul class="c-list3__child">
-                            <li>Gallery KOTARO</li>
-                            <li><a href="#">Sta. Azabudai</a></li>
-                            <li>Private Residence T</li>
+                            <li><a href="#">Partnership Salon Project</a></li>
+                            <li>Commercial Interior Concept</li>
+                            <li>Private Residence S</li>
+                            <li>Minimalist Housing Case</li>
                         </ul>
                     </li>
 
@@ -349,6 +379,12 @@
     <footer class="c-footer">
         <div class="l-container">
             <p class="c-footer__txt">&#169; some All Rights Reserved.</p>
+        </div>
+        <div class="js-gotop">
+            <a href="#wrapper">
+                <!-- シンプルな上向き矢印アロー（SVG内製） -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1a1311" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+            </a>
         </div>
     </footer>
 

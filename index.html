@@ -5,11 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>some | website coming soon...</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
-    
     <style>
+        /* ----------------------------------------------------------------
+           【変更箇所2】お手持ちのフォントファイルをサーバーから直接読み込む設定
+        ---------------------------------------------------------------- */
+        @font-face {
+            font-family: "My-DIN-2014-Bold";
+            /* 同じフォルダに置いたフォントファイルを指定（すべて小文字が確実です） */
+            src: url("din2014-bold.otf") format("opentype"); 
+            font-weight: 700;
+            font-style: normal;
+        }
+
         /* ----------------------------------------------------------------
            全体共通設定（画像をそのまま再現するベース）
         ---------------------------------------------------------------- */
@@ -26,8 +33,10 @@
         body {
             background-color: #ffffff; /* 完全な白背景 */
             color: #1a1a1a; /* 画像で使用されている深い墨黒 */
-            font-family: "DIN 2014", "Montserrat", sans-serif;
-            font-weight: 300;
+            
+            /* 【変更箇所3】スマホ版でも確実にDIN 2014 Boldが適用されるように指定 */
+            font-family: "My-DIN-2014-Bold", sans-serif;
+            font-weight: 700; /* 全体をBoldに統一 */
             -webkit-font-smoothing: antialiased;
             
             /* 画面全体を1枚のキャンバスとして、絶対配置の基準にする */
@@ -50,7 +59,7 @@
         ---------------------------------------------------------------- */
         .logo-area {
             position: absolute;
-            top: 10%;      /* 上からの位置（バランスを見て調整可能） */
+            top: 10%;      /* 上からの位置 */
             left: 5%;      /* 左からの位置 */
         }
 
@@ -76,7 +85,7 @@
 
         .coming-soon-text {
             font-size: 24px;
-            font-weight: 300;      /* すっきりとした細めのウエイト */
+            font-weight: 700;      /* スマホ対応のため300から700へ変更 */
             letter-spacing: 0.1em; /* 文字の間の美しい空気感 */
         }
 
@@ -90,7 +99,7 @@
             font-size: 15px;
             line-height: 1.65;
             letter-spacing: 0.08em;
-            font-weight: 400;
+            font-weight: 700;      /* スマホ対応のため400から700へ変更 */
         }
 
         .address-block {
@@ -102,23 +111,28 @@
         }
 
         .url-block {
-            font-weight: 400;
+            font-weight: 700;      /* スマホ対応のため400から700へ変更 */
         }
 
         /* ----------------------------------------------------------------
            スマホ表示用の微調整（レスポンシブ）
         ---------------------------------------------------------------- */
         @media (max-width: 768px) {
+            .logo-area {
+                top: 8%;
+                left: 8%;
+            }
             .brand-logo {
-                font-size: 52px; /* スマホではロゴを少しだけ縮小 */
+                font-size: 60px; /* スマホでも綺麗に見える太さに微調整 */
             }
             .coming-soon-text {
                 font-size: 18px; /* 中央の文字もスマホに最適化 */
             }
             .footer-info-area {
                 font-size: 13px; /* 下部の文字を少し小さくして、画面内に収める */
-                bottom: 5%;
-                left: 6%;
+                bottom: 6%;
+                left: 8%;
+                right: 8%;
             }
         }
     </style>

@@ -1,24 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>some | website coming soon...</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    
     <style>
         /* ----------------------------------------------------------------
-           0. お手持ちのフォントデータをサーバーから直接読み込む設定
-        ---------------------------------------------------------------- */
-        @font-face {
-            font-family: "My-DIN-2014-Bold";
-            /* サーバー上のフォントファイルを指定（同じフォルダに置いてある前提） */
-            src: url("din2014-bold.otf") format("opentype"); 
-            font-weight: 700;
-            font-style: normal;
-        }
-
-        /* ----------------------------------------------------------------
-           1. 全体共通設定（すべての文字をお手持ちのDIN 2014 Boldに固定）
+           全体共通設定（画像をそのまま再現するベース）
         ---------------------------------------------------------------- */
         * {
             margin: 0;
@@ -31,14 +24,13 @@
         }
 
         body {
-            background-color: #ffffff; 
-            color: #1a1a1a; 
-            
-            /* 上記で設定したフォント名を指定 */
-            font-family: "My-DIN-2014-Bold", sans-serif;
-            font-weight: 700;
+            background-color: #ffffff; /* 完全な白背景 */
+            color: #1a1a1a; /* 画像で使用されている深い墨黒 */
+            font-family: "DIN 2014", "Montserrat", sans-serif;
+            font-weight: 300;
             -webkit-font-smoothing: antialiased;
             
+            /* 画面全体を1枚のキャンバスとして、絶対配置の基準にする */
             position: relative; 
             width: 100%;
             overflow: hidden;
@@ -54,77 +46,79 @@
         }
 
         /* ----------------------------------------------------------------
-           2. ロゴエリア（some）
+           1. 左上のロゴ配置（DIN 2014 Bold / 全小文字）
         ---------------------------------------------------------------- */
         .logo-area {
             position: absolute;
-            top: 10%;      
-            left: 5%;      
+            top: 10%;      /* 上からの位置（バランスを見て調整可能） */
+            left: 5%;      /* 左からの位置 */
         }
 
         .brand-logo {
-            font-size: 76px;       
-            letter-spacing: -0.01em; 
+            font-size: 76px;       /* はっきり、くっきりとした大きなロゴサイズ */
+            font-weight: 700;      /* DIN 2014 Bold の太さ */
+            letter-spacing: -0.01em; /* 画像に合わせた絶妙な詰まり具合 */
             line-height: 1;
             text-transform: lowercase;
         }
 
         /* ----------------------------------------------------------------
-           3. 中央「website coming soon...」
+           2. 中央の「website coming soon...」
         ---------------------------------------------------------------- */
         .center-area {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%); 
+            transform: translate(-50%, -50%); /* 完全に画面の真中央に固定 */
             text-align: center;
             width: 100%;
         }
 
         .coming-soon-text {
             font-size: 24px;
-            letter-spacing: 0.1em; 
+            font-weight: 300;      /* すっきりとした細めのウエイト */
+            letter-spacing: 0.1em; /* 文字の間の美しい空気感 */
         }
 
         /* ----------------------------------------------------------------
-           4. 左下インフォメーション
+           3. 左下のインフォメーション（住所・連絡先）
         ---------------------------------------------------------------- */
         .footer-info-area {
             position: absolute;
-            bottom: 8%;    
-            left: 5%;      
+            bottom: 8%;    /* 下からの位置 */
+            left: 5%;      /* 左からの位置 */
             font-size: 15px;
             line-height: 1.65;
             letter-spacing: 0.08em;
+            font-weight: 400;
         }
 
         .address-block {
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
         .phone-block {
-            margin-bottom: 25px; 
+            margin-bottom: 25px; /* 電話番号とURLの間に画像通りの広い猶予 */
+        }
+
+        .url-block {
+            font-weight: 400;
         }
 
         /* ----------------------------------------------------------------
-           スマホ・PC共通のレスポンシブ最適化
+           スマホ表示用の微調整（レスポンシブ）
         ---------------------------------------------------------------- */
         @media (max-width: 768px) {
-            .logo-area {
-                top: 8%;
-                left: 8%;
-            }
             .brand-logo {
-                font-size: 60px; 
+                font-size: 52px; /* スマホではロゴを少しだけ縮小 */
             }
             .coming-soon-text {
-                font-size: 18px; 
+                font-size: 18px; /* 中央の文字もスマホに最適化 */
             }
             .footer-info-area {
-                font-size: 13px; 
-                bottom: 6%;
-                left: 8%;
-                right: 8%;
+                font-size: 13px; /* 下部の文字を少し小さくして、画面内に収める */
+                bottom: 5%;
+                left: 6%;
             }
         }
     </style>

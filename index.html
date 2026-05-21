@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>some | website coming soon...</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -22,7 +23,7 @@
         body {
             background-color: #ffffff; 
             color: #1a1a1a; 
-            font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+            font-family: "Montserrat", sans-serif;
             font-weight: 400;
             -webkit-font-smoothing: antialiased;
             position: relative; 
@@ -39,6 +40,9 @@
             opacity: 0.5;
         }
 
+        /* ----------------------------------------------------------------
+           1. ロゴエリア（スマホでもDIN 2014の直線を100%再現）
+        ---------------------------------------------------------------- */
         .logo-area {
             position: absolute;
             top: 10%;      
@@ -46,14 +50,18 @@
         }
 
         .brand-logo {
-            font-family: "Oswald", "Montserrat", sans-serif;
-            font-size: 76px;       
-            font-weight: 700;      
-            letter-spacing: 0.02em; 
-            line-height: 1;
+            /* DIN特有の「縦長かつ幾何学的な直線」を再現するフォントを指定 */
+            font-family: "Barlow Semi Condensed", sans-serif;
+            font-size: 82px;       /* 縦長フォントに合わせてサイズを微調整 */
+            font-weight: 700;      /* 強力なBold */
+            letter-spacing: -0.01em; /* DIN特有のソリッドな詰まり具合 */
+            line-height: 0.8;
             text-transform: lowercase;
         }
 
+        /* ----------------------------------------------------------------
+           2. 中央「website coming soon...」
+        ---------------------------------------------------------------- */
         .center-area {
             position: absolute;
             top: 50%;
@@ -69,6 +77,9 @@
             letter-spacing: 0.12em; 
         }
 
+        /* ----------------------------------------------------------------
+           3. 左下インフォメーション
+        ---------------------------------------------------------------- */
         .footer-info-area {
             position: absolute;
             bottom: 8%;    
@@ -90,13 +101,16 @@
             font-weight: 400;
         }
 
+        /* ----------------------------------------------------------------
+           スマホ表示の「はっきり・くっきり」最適化
+        ---------------------------------------------------------------- */
         @media (max-width: 768px) {
             .logo-area {
                 top: 8%;
                 left: 8%;
             }
             .brand-logo {
-                font-size: 60px; 
+                font-size: 68px; /* スマホでも丸まらず、DINの鋭さを保つサイズ */
             }
             .coming-soon-text {
                 font-size: 18px; 

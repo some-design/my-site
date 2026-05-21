@@ -7,9 +7,12 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:XTRA,YTAS@468,750&display=swap" rel="stylesheet">
     
     <style>
+        /* ----------------------------------------------------------------
+           全体共通設定（すべての文字をDIN Boldに固定）
+        ---------------------------------------------------------------- */
         * {
             margin: 0;
             padding: 0;
@@ -23,9 +26,13 @@
         body {
             background-color: #ffffff; 
             color: #1a1a1a; 
-            font-family: "Montserrat", sans-serif;
-            font-weight: 400;
+            
+            /* 画面上のすべての文字のベースを、DIN特有の「横幅を抑えた直線型（Condensed）の極太」に強制固定 */
+            font-family: "Roboto Flex", sans-serif;
+            font-variation-settings: "XTRA" 468, "YTAS" 750; /* DINの骨格比率をプログラムで固定 */
+            font-weight: 800; /* 全身をカチッとしたBoldに */
             -webkit-font-smoothing: antialiased;
+            
             position: relative; 
             width: 100%;
             overflow: hidden;
@@ -41,7 +48,7 @@
         }
 
         /* ----------------------------------------------------------------
-           1. ロゴエリア（スマホでもDIN 2014の直線を100%再現）
+           1. ロゴエリア（some）
         ---------------------------------------------------------------- */
         .logo-area {
             position: absolute;
@@ -50,17 +57,15 @@
         }
 
         .brand-logo {
-            /* DIN特有の「縦長かつ幾何学的な直線」を再現するフォントを指定 */
-            font-family: "Barlow Semi Condensed", sans-serif;
-            font-size: 82px;       /* 縦長フォントに合わせてサイズを微調整 */
-            font-weight: 700;      /* 強力なBold */
-            letter-spacing: -0.01em; /* DIN特有のソリッドな詰まり具合 */
+            font-size: 80px;       
+            font-weight: 800;      
+            letter-spacing: -0.02em; /* ソリッドな詰まり具合 */
             line-height: 0.8;
             text-transform: lowercase;
         }
 
         /* ----------------------------------------------------------------
-           2. 中央「website coming soon...」
+           2. 中央「website coming soon...」（こちらもDIN Boldに！）
         ---------------------------------------------------------------- */
         .center-area {
             position: absolute;
@@ -72,21 +77,22 @@
         }
 
         .coming-soon-text {
-            font-size: 24px;
-            font-weight: 400;      
-            letter-spacing: 0.12em; 
+            font-size: 26px;
+            font-weight: 800;      
+            letter-spacing: 0.08em; /* Boldに合わせた美しい間隔 */
         }
 
         /* ----------------------------------------------------------------
-           3. 左下インフォメーション
+           3. 左下インフォメーション（住所・電話・URLもすべてDIN Boldに！）
         ---------------------------------------------------------------- */
         .footer-info-area {
             position: absolute;
             bottom: 8%;    
             left: 5%;      
-            font-size: 15px;
-            line-height: 1.7;
-            letter-spacing: 0.08em;
+            font-size: 16px;
+            line-height: 1.6;
+            letter-spacing: 0.05em;
+            font-weight: 800;
         }
 
         .address-block {
@@ -98,11 +104,11 @@
         }
 
         .url-block {
-            font-weight: 400;
+            font-weight: 800;
         }
 
         /* ----------------------------------------------------------------
-           スマホ表示の「はっきり・くっきり」最適化
+           スマホ・PC共通の「はっきり・くっきり」最適化
         ---------------------------------------------------------------- */
         @media (max-width: 768px) {
             .logo-area {
@@ -110,13 +116,13 @@
                 left: 8%;
             }
             .brand-logo {
-                font-size: 68px; /* スマホでも丸まらず、DINの鋭さを保つサイズ */
+                font-size: 68px; /* スマホでも圧倒的な存在感を維持 */
             }
             .coming-soon-text {
-                font-size: 18px; 
+                font-size: 20px; 
             }
             .footer-info-area {
-                font-size: 13px; 
+                font-size: 14px; 
                 bottom: 6%;
                 left: 8%;
                 right: 8%;

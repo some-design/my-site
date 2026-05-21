@@ -5,11 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>some | website coming soon...</title>
     
-    <link rel="stylesheet" href="https://use.typekit.net/af/d305e7/0000000000000000774bda3b/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3">
-    
     <style>
         /* ----------------------------------------------------------------
-           1. 全体共通設定（全ての文字をDIN 2014 Boldに完全固定）
+           0. お手持ちのフォントデータをサーバーから直接読み込む設定
+        ---------------------------------------------------------------- */
+        @font-face {
+            font-family: "My-DIN-2014-Bold";
+            /* サーバー上のフォントファイルを指定（同じフォルダに置いてある前提） */
+            src: url("din2014-bold.otf") format("opentype"); 
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        /* ----------------------------------------------------------------
+           1. 全体共通設定（すべての文字をお手持ちのDIN 2014 Boldに固定）
         ---------------------------------------------------------------- */
         * {
             margin: 0;
@@ -25,10 +34,9 @@
             background-color: #ffffff; 
             color: #1a1a1a; 
             
-            /* 読み込んだ本物のDIN 2014フォントを画面全体に適用 */
-            font-family: "din-2014", sans-serif;
-            font-weight: 700; /* Bold (n7) */
-            font-style: normal;
+            /* 上記で設定したフォント名を指定 */
+            font-family: "My-DIN-2014-Bold", sans-serif;
+            font-weight: 700;
             -webkit-font-smoothing: antialiased;
             
             position: relative; 
@@ -56,8 +64,7 @@
 
         .brand-logo {
             font-size: 76px;       
-            font-weight: 700; /* DIN 2014 Bold */
-            letter-spacing: -0.01em; /* ソリッドな詰まり */
+            letter-spacing: -0.01em; 
             line-height: 1;
             text-transform: lowercase;
         }
@@ -76,12 +83,11 @@
 
         .coming-soon-text {
             font-size: 24px;
-            font-weight: 700; /* DIN 2014 Bold */
-            letter-spacing: 0.1em; /* ゆったりとした空気感 */
+            letter-spacing: 0.1em; 
         }
 
         /* ----------------------------------------------------------------
-           4. 左下インフォメーション（住所・電話・URL）
+           4. 左下インフォメーション
         ---------------------------------------------------------------- */
         .footer-info-area {
             position: absolute;
@@ -90,7 +96,6 @@
             font-size: 15px;
             line-height: 1.65;
             letter-spacing: 0.08em;
-            font-weight: 700; /* DIN 2014 Bold */
         }
 
         .address-block {
@@ -101,12 +106,8 @@
             margin-bottom: 25px; 
         }
 
-        .url-block {
-            font-weight: 700;
-        }
-
         /* ----------------------------------------------------------------
-           スマホ・PC共通の「はっきり・くっきり」最適化
+           スマホ・PC共通のレスポンシブ最適化
         ---------------------------------------------------------------- */
         @media (max-width: 768px) {
             .logo-area {

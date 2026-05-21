@@ -7,18 +7,19 @@
     
     <style>
         /* ----------------------------------------------------------------
-           【変更箇所2】お手持ちのフォントファイルをサーバーから直接読み込む設定
+           0. フォントファイルをサーバーから直接読み込む設定（otf/ttf両対応版）
         ---------------------------------------------------------------- */
         @font-face {
             font-family: "My-DIN-2014-Bold";
-            /* 同じフォルダに置いたフォントファイルを指定（すべて小文字が確実です） */
-            src: url("din2014-bold.otf") format("opentype"); 
+            /* サーバー上の小文字ファイル名を探します。見つかった方を自動適用します */
+            src: url("din2014-bold.otf") format("opentype"),
+                 url("din2014-bold.ttf") format("truetype"); 
             font-weight: 700;
             font-style: normal;
         }
 
         /* ----------------------------------------------------------------
-           全体共通設定（画像をそのまま再現するベース）
+           全体共通設定（すべてのテキストをDIN 2014 Boldに統一）
         ---------------------------------------------------------------- */
         * {
             margin: 0;
@@ -32,14 +33,12 @@
 
         body {
             background-color: #ffffff; /* 完全な白背景 */
-            color: #1a1a1a; /* 画像で使用されている深い墨黒 */
+            color: #1a1a1a; /* 深い墨黒 */
             
-            /* 【変更箇所3】スマホ版でも確実にDIN 2014 Boldが適用されるように指定 */
             font-family: "My-DIN-2014-Bold", sans-serif;
             font-weight: 700; /* 全体をBoldに統一 */
             -webkit-font-smoothing: antialiased;
             
-            /* 画面全体を1枚のキャンバスとして、絶対配置の基準にする */
             position: relative; 
             width: 100%;
             overflow: hidden;
@@ -55,18 +54,18 @@
         }
 
         /* ----------------------------------------------------------------
-           1. 左上のロゴ配置（DIN 2014 Bold / 全小文字）
+           1. 左上のロゴ配置（some）
         ---------------------------------------------------------------- */
         .logo-area {
             position: absolute;
-            top: 10%;      /* 上からの位置 */
-            left: 5%;      /* 左からの位置 */
+            top: 10%;      
+            left: 5%;      
         }
 
         .brand-logo {
-            font-size: 76px;       /* はっきり、くっきりとした大きなロゴサイズ */
-            font-weight: 700;      /* DIN 2014 Bold の太さ */
-            letter-spacing: -0.01em; /* 画像に合わせた絶妙な詰まり具合 */
+            font-size: 76px;       
+            font-weight: 700;      
+            letter-spacing: -0.01em; 
             line-height: 1;
             text-transform: lowercase;
         }
@@ -78,28 +77,28 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%); /* 完全に画面の真中央に固定 */
+            transform: translate(-50%, -50%); 
             text-align: center;
             width: 100%;
         }
 
         .coming-soon-text {
             font-size: 24px;
-            font-weight: 700;      /* スマホ対応のため300から700へ変更 */
-            letter-spacing: 0.1em; /* 文字の間の美しい空気感 */
+            font-weight: 700;      
+            letter-spacing: 0.1em; 
         }
 
         /* ----------------------------------------------------------------
-           3. 左下のインフォメーション（住所・連絡先）
+           3. 左下のインフォメーション
         ---------------------------------------------------------------- */
         .footer-info-area {
             position: absolute;
-            bottom: 8%;    /* 下からの位置 */
-            left: 5%;      /* 左からの位置 */
+            bottom: 8%;    
+            left: 5%;      
             font-size: 15px;
             line-height: 1.65;
             letter-spacing: 0.08em;
-            font-weight: 700;      /* スマホ対応のため400から700へ変更 */
+            font-weight: 700;      
         }
 
         .address-block {
@@ -107,15 +106,15 @@
         }
 
         .phone-block {
-            margin-bottom: 25px; /* 電話番号とURLの間に画像通りの広い猶予 */
+            margin-bottom: 25px; 
         }
 
         .url-block {
-            font-weight: 700;      /* スマホ対応のため400から700へ変更 */
+            font-weight: 700;      
         }
 
         /* ----------------------------------------------------------------
-           スマホ表示用の微調整（レスポンシブ）
+           スマホ表示用のレスポンシブ微調整
         ---------------------------------------------------------------- */
         @media (max-width: 768px) {
             .logo-area {
@@ -123,13 +122,13 @@
                 left: 8%;
             }
             .brand-logo {
-                font-size: 60px; /* スマホでも綺麗に見える太さに微調整 */
+                font-size: 60px; 
             }
             .coming-soon-text {
-                font-size: 18px; /* 中央の文字もスマホに最適化 */
+                font-size: 18px; 
             }
             .footer-info-area {
-                font-size: 13px; /* 下部の文字を少し小さくして、画面内に収める */
+                font-size: 13px; 
                 bottom: 6%;
                 left: 8%;
                 right: 8%;
